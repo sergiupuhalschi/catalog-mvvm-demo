@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.catganisation.catalog.presentation.login.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/landing_bg" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg_overlay" />
+
+        <EditText
+            android:id="@+id/usernameTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/xlarge_margin"
+            android:layout_marginEnd="@dimen/xlarge_margin"
+            android:layout_marginBottom="@dimen/xlarge_margin"
+            android:hint="@string/username"
+            android:imeOptions="actionNext"
+            android:inputType="textEmailAddress"
+            android:text="@={viewModel.username}"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/title"
+            android:textSize="@dimen/text_size_header"
+            app:layout_constraintBottom_toTopOf="@+id/passwordTV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/passwordTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/xlarge_margin"
+            android:hint="@string/password"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:text="@={viewModel.password}"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/title"
+            android:textSize="@dimen/text_size_header"
+            app:layout_constraintBottom_toTopOf="@+id/loginBtn"
+            app:layout_constraintEnd_toEndOf="@+id/usernameTV"
+            app:layout_constraintStart_toStartOf="@+id/usernameTV" />
+
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height"
+            android:background="@color/colorPrimary"
+            android:enabled="@{!viewModel.isLoading()}"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:foreground="?attr/selectableItemBackground"
+            android:onClick="@{() -> viewModel.login()}"
+            android:text="@string/sign_in"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/text_size_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/usernameTV"
+            app:layout_constraintStart_toStartOf="@+id/usernameTV"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Catalog</string>
+
+    <!-- Common -->
+    <string name="unexpectedError">Something went wrong</string>
+
+    <!-- Login -->
+    <string name="username_empty_error">Username can\'t be empty</string>
+    <string name="password_empty_error">Password can\'t be empty</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign in</string>
+
+    <!-- Menu -->
+    <string name="sign_out">Sign out</string>
+
+    <!-- Cat Breed Details-->
+    <string name="country_code">Country Code</string>
+    <string name="temperament">Temperament</string>
+    <string name="check_out_more"><u>Check out more</u></string>
+</resources>
