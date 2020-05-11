@@ -3,6 +3,7 @@ package com.catganisation.catalog.injection.modules
 import android.app.Application
 import com.catganisation.catalog.BuildConfig
 import com.catganisation.catalog.data.remote.interceptors.CatsApiKeyInterceptor
+import com.catganisation.catalog.data.remote.interceptors.SessionTokenInterceptor
 import com.catganisation.catalog.data.remote.services.CatsApi
 import com.catganisation.catalog.data.remote.services.UserApi
 import com.google.gson.Gson
@@ -24,10 +25,14 @@ class NetworkModule {
     @Provides
     fun provideUserApi(
         okHttpClientBuilder: OkHttpClient.Builder,
-        retrofitBuilder: Retrofit.Builder
+        retrofitBuilder: Retrofit.Builder,
+        sessionTokenInterceptor: SessionTokenInterceptor
     ): UserApi {
         return retrofitBuilder
-            .client(okHttpClientBuilder.build())
+            .client(
+                okHttpClientBuilder.addNetworkInterceptor(sessionTokenInterceptor)
+                    .build()
+            )
             .baseUrl(BuildConfig.USER_API_ENDPOINT)
             .build()
             .create(UserApi::class.java)

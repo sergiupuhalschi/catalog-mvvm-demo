@@ -1,6 +1,7 @@
 package com.catganisation.catalog.domain.usecases.account
 
 import com.catganisation.catalog.data.models.User
+import com.catganisation.catalog.data.models.requests.LoginRequest
 import com.catganisation.catalog.data.repositories.base.UserRepository
 import com.catganisation.catalog.domain.models.holders.LoginData
 import com.catganisation.catalog.domain.usecases.SingleUseCase
@@ -15,7 +16,12 @@ class LoginUseCase @Inject constructor(
 ) : SingleUseCase<LoginData, User> {
 
     override fun perform(params: LoginData): Single<User> {
-        return repository.login(params.username, params.password)
+        return repository.login(params.toRequest())
             .applySchedulers(schedulerProvider)
     }
+
+    private fun LoginData.toRequest() = LoginRequest(
+        username = username,
+        password = password
+    )
 }

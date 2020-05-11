@@ -2,6 +2,7 @@ package com.catganisation.catalog.data.repositories
 
 import com.catganisation.catalog.data.local.preferences.Persister
 import com.catganisation.catalog.data.models.User
+import com.catganisation.catalog.data.models.requests.LoginRequest
 import com.catganisation.catalog.data.repositories.base.UserRepository
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
@@ -13,8 +14,8 @@ class UserMainRepository @Inject constructor(
     private val persister: Persister
 ) : UserRepository {
 
-    override fun login(username: String, password: String): Single<User> {
-        return Single.just(buildDummyUser(username))
+    override fun login(request: LoginRequest): Single<User> {
+        return Single.just(buildDummyUser(request.username))
             .delay(1, TimeUnit.SECONDS)
             .map { user ->
                 persister.set(Persister.Key.SessionToken, user.sessionKey)
