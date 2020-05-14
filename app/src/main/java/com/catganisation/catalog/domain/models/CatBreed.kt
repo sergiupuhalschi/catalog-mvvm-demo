@@ -3,7 +3,7 @@ package com.catganisation.catalog.domain.models
 import android.os.Parcel
 import android.os.Parcelable
 
-data class CatBreedDto(
+data class CatBreed(
     val id: String,
     val name: String,
     val description: String,
@@ -40,12 +40,12 @@ data class CatBreedDto(
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<CatBreedDto> {
-        override fun createFromParcel(parcel: Parcel): CatBreedDto {
-            return CatBreedDto(parcel)
+    companion object CREATOR : Parcelable.Creator<CatBreed> {
+        override fun createFromParcel(parcel: Parcel): CatBreed {
+            return CatBreed(parcel)
         }
 
-        override fun newArray(size: Int): Array<CatBreedDto?> {
+        override fun newArray(size: Int): Array<CatBreed?> {
             return arrayOfNulls(size)
         }
     }

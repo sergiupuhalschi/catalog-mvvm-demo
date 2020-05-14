@@ -14,6 +14,9 @@
     <!-- Menu -->
     <string name="sign_out">Sign out</string>
 
+    <!-- Cat Breeds -->
+    <string name="no_items">No items</string>
+
     <!-- Cat Breed Details-->
     <string name="country_code">Country Code</string>
     <string name="temperament">Temperament</string>

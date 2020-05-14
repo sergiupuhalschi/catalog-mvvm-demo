@@ -1,31 +1,35 @@
 package com.catganisation.catalog.presentation.cats
 
 import androidx.lifecycle.MutableLiveData
+import com.catganisation.catalog.R
 import com.catganisation.catalog.domain.models.holders.PageData
-import com.catganisation.catalog.domain.models.CatBreedDto
+import com.catganisation.catalog.domain.models.CatBreed
 import com.catganisation.catalog.domain.usecases.account.LogoutUseCase
 import com.catganisation.catalog.domain.usecases.breeds.GetCatBreedsUseCase
 import com.catganisation.catalog.presentation.common.BaseViewModel
 import com.catganisation.catalog.utils.SingleLiveEvent
+import com.catganisation.catalog.utils.providers.StringProvider
 import com.paginate.Paginate
+import timber.log.Timber
 import javax.inject.Inject
 
 private const val PAGE_SIZE = 20
 
 class CatBreedsViewModel @Inject constructor(
     private val getCatBreedsUseCase: GetCatBreedsUseCase,
-    private val logoutUseCase: LogoutUseCase
+    private val logoutUseCase: LogoutUseCase,
+    private val stringProvider: StringProvider
 ) : BaseViewModel(), Paginate.Callbacks {
 
     val error = SingleLiveEvent<String>()
     val catBreedViewDataList = MutableLiveData<List<CatBreedViewData>>()
-    val openDetails = SingleLiveEvent<CatBreedDto>()
+    val openDetails = SingleLiveEvent<CatBreed>()
     val openLogin = SingleLiveEvent<Unit>()
 
     private var currentPage = 0
     private var hasLoadedAllItems = false
     private var isLoading = false
-    private var catBreeds = listOf<CatBreedDto>()
+    private var catBreeds = listOf<CatBreed>()
 
     init {
         loadBreeds()
@@ -62,11 +66,12 @@ class CatBreedsViewModel @Inject constructor(
             .safeSubscribe({
                 catBreedViewDataList.value = it
             }, {
-                error.value = it.message
+                Timber.e(it)
+                error.value = stringProvider.getString(R.string.unexpectedError)
             })
     }
 
-    private fun CatBreedDto.toViewData() = CatBreedViewData(
+    private fun CatBreed.toViewData() = CatBreedViewData(
         catBreed = this,
         onClicked = { openDetails.value = it }
     )

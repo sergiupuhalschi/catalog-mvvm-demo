@@ -3,7 +3,7 @@ package com.catganisation.catalog.domain.usecases.breeds
 import com.catganisation.catalog.data.models.Image
 import com.catganisation.catalog.domain.models.holders.PageData
 import com.catganisation.catalog.data.repositories.base.CatsRepository
-import com.catganisation.catalog.domain.models.CatBreedDto
+import com.catganisation.catalog.domain.models.CatBreed
 import com.catganisation.catalog.domain.usecases.SingleUseCase
 import com.catganisation.catalog.domain.usecases.applySchedulers
 import com.catganisation.catalog.utils.providers.schedulers.SchedulerProvider
@@ -14,9 +14,9 @@ import javax.inject.Inject
 class GetCatBreedsUseCase @Inject constructor(
     private val repository: CatsRepository,
     private val schedulerProvider: SchedulerProvider
-) : SingleUseCase<PageData, List<CatBreedDto>> {
+) : SingleUseCase<PageData, List<CatBreed>> {
 
-    override fun perform(params: PageData): Single<List<CatBreedDto>> {
+    override fun perform(params: PageData): Single<List<CatBreed>> {
         return repository.getBreeds(params.page, params.limit)
             .flatMap { Observable.fromIterable(it) }
             .flatMapSingle {
@@ -26,14 +26,14 @@ class GetCatBreedsUseCase @Inject constructor(
             .filter { it.isNotEmpty() }
             .map { it.first() }
             .toList()
-            .map { images -> images.toCatBreedDtos() }
+            .map { images -> images.toCatBreeds() }
             .applySchedulers(schedulerProvider)
     }
 
-    private fun List<Image>.toCatBreedDtos() = mapNotNull {
+    private fun List<Image>.toCatBreeds() = mapNotNull {
         val breed = it.breeds?.firstOrNull() ?: return@mapNotNull null
         breed.id ?: return@mapNotNull null
-        CatBreedDto(
+        CatBreed(
             id = breed.id,
             name = breed.name ?: "",
             description = breed.description ?: "",

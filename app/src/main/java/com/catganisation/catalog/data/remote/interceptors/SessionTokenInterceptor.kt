@@ -12,7 +12,7 @@ class SessionTokenInterceptor @Inject constructor(
 ) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val newRequest = persister.get<String>(Persister.Key.SessionToken)?.let {
+        val newRequest = persister.get(Persister.Key.SessionToken)?.let {
             chain.request()
                 .newBuilder()
                 .addHeader(AUTHORIZATION_HEADER_KEY, it)

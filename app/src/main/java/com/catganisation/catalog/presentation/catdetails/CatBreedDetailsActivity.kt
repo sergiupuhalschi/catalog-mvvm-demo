@@ -10,7 +10,7 @@ import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import com.catganisation.catalog.R
 import com.catganisation.catalog.databinding.CatBreedDetailsActivityBinding
-import com.catganisation.catalog.domain.models.CatBreedDto
+import com.catganisation.catalog.domain.models.CatBreed
 import com.catganisation.catalog.presentation.common.ViewModelActivity
 import com.catganisation.catalog.utils.observeNonNull
 import javax.inject.Inject
@@ -27,7 +27,7 @@ class CatBreedDetailsActivity : ViewModelActivity() {
 
         fun newIntent(
             context: Context,
-            catBreed: CatBreedDto
+            catBreed: CatBreed
         ) = Intent(context, CatBreedDetailsActivity::class.java).apply {
             putExtra(IN_CAT_BREED_KEY, catBreed)
         }
@@ -43,8 +43,8 @@ class CatBreedDetailsActivity : ViewModelActivity() {
             lifecycleOwner = this@CatBreedDetailsActivity
         }
 
-        val catBreed = intent.getParcelableExtra<CatBreedDto>(IN_CAT_BREED_KEY)
-            ?: throw IllegalArgumentException("CatBreedDto argument is required")
+        val catBreed = intent.getParcelableExtra<CatBreed>(IN_CAT_BREED_KEY)
+            ?: throw IllegalArgumentException("CatBreed argument is required")
         viewModel.setCatBreed(catBreed)
 
         initViews()

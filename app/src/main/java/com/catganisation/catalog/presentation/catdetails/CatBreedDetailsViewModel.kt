@@ -1,7 +1,7 @@
 package com.catganisation.catalog.presentation.catdetails
 
 import androidx.lifecycle.MutableLiveData
-import com.catganisation.catalog.domain.models.CatBreedDto
+import com.catganisation.catalog.domain.models.CatBreed
 import com.catganisation.catalog.presentation.common.BaseViewModel
 import com.catganisation.catalog.utils.SingleLiveEvent
 import javax.inject.Inject
@@ -17,7 +17,7 @@ class CatBreedDetailsViewModel @Inject constructor() : BaseViewModel() {
 
     val openUrl = SingleLiveEvent<String>()
 
-    fun setCatBreed(catBreed: CatBreedDto) {
+    fun setCatBreed(catBreed: CatBreed) {
         imageUrl.value = catBreed.imageUrl
         name.value = catBreed.name
         description.value = catBreed.description

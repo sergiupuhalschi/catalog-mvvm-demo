@@ -23,5 +23,12 @@
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/cat_breed_item" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/no_items"
+            app:visible="@{viewModel.catBreedViewDataList.empty}" />
     </FrameLayout>
 </layout>
