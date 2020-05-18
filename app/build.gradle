@@ -66,6 +66,11 @@ ext {
     okHttpVersion = '4.4.0'
     timberVersion = '4.7.1'
     rxJavaVersion = '3.0.0'
+
+    mockitoKotlinVersion = '1.5.0'
+    mockitoInlineVersion = '2.13.0'
+    jUnitVersion = '4.13'
+    archTestingVersion = '2.1.0'
 }
 
 dependencies {
@@ -82,9 +87,12 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
 
     // Testing
-    testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation "junit:junit:$jUnitVersion"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion"
+    testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockitoKotlinVersion"
+    testImplementation "org.mockito:mockito-core:$mockitoInlineVersion"
+    testImplementation "org.mockito:mockito-inline:$mockitoInlineVersion"
+    testImplementation "androidx.arch.core:core-testing:$archTestingVersion"
 
     // Dependency Injection
     api "com.google.dagger:dagger:$daggerVersion"
