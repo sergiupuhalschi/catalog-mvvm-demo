@@ -13,7 +13,7 @@ interface CatsApi {
     fun getCatBreeds(
         @Query("page") page: Int,
         @Query("limit") limit: Int
-    ): Observable<List<CatBreed>>
+    ): Single<List<CatBreed>>
 
     @GET("v1/images/search")
     fun getBreedImages(

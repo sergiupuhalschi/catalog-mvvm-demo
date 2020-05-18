@@ -7,7 +7,7 @@ import io.reactivex.rxjava3.core.Single
 
 interface CatsRepository {
 
-    fun getBreeds(page: Int, limit: Int): Observable<List<CatBreed>>
+    fun getBreeds(page: Int, limit: Int): Single<List<CatBreed>>
 
     fun getBreedImages(breedId: String): Single<List<Image>>
 }

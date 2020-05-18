@@ -12,7 +12,7 @@ class CatsMainRepository @Inject constructor(
     private val api: CatsApi
 ) : CatsRepository {
 
-    override fun getBreeds(page: Int, limit: Int): Observable<List<CatBreed>>
+    override fun getBreeds(page: Int, limit: Int): Single<List<CatBreed>>
             = api.getCatBreeds(page, limit)
 
     override fun getBreedImages(breedId: String): Single<List<Image>>
